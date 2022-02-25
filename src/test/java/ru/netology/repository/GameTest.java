@@ -5,22 +5,17 @@ import ru.netology.domain.Player;
 import ru.netology.exception.AlreadyExistsException;
 import ru.netology.exception.NotRegisteredException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
     Game game = new Game();
 
-    private Player player1 = new Player(1, "Hero", 150);
-    private Player player2 = new Player(2, "Weak", 1);
-    private Player player3 = new Player(3, "Strong", 150);
-    private Player player4 = new Player(4, "Super hero", 300);
-    private Player player5 = new Player(5, "Hero", 250);
-    private Player player6 = new Player(4, "Existing id", 250);
-
+    private final Player player1 = new Player(1, "Hero", 150);
+    private final Player player2 = new Player(2, "Weak", 1);
+    private final Player player3 = new Player(3, "Strong", 150);
+    private final Player player4 = new Player(4, "Super hero", 300);
+    private final Player player5 = new Player(5, "Hero", 250);
+    private final Player player6 = new Player(4, "Existing id", 250);
 
     @Test
     void registerOnePlayer() {
