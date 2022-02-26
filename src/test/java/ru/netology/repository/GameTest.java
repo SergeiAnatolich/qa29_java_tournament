@@ -2,7 +2,6 @@ package ru.netology.repository;
 
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Player;
-import ru.netology.exception.AlreadyExistsException;
 import ru.netology.exception.NotRegisteredException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,12 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
     Game game = new Game();
 
-    private final Player player1 = new Player(1, "Hero", 150);
-    private final Player player2 = new Player(2, "Weak", 1);
-    private final Player player3 = new Player(3, "Strong", 150);
-    private final Player player4 = new Player(4, "Super hero", 300);
-    private final Player player5 = new Player(5, "Hero", 250);
-    private final Player player6 = new Player(4, "Existing id", 250);
+    private final Player player1 = new Player("Hero", 150);
+    private final Player player2 = new Player("Weak", 1);
+    private final Player player3 = new Player("Strong", 150);
+    private final Player player4 = new Player("Super hero", 300);
+    private final Player player5 = new Player("Hero", 250);
 
     @Test
     void registerOnePlayer() {
@@ -35,19 +33,15 @@ class GameTest {
     }
 
     @Test
-    void registerExistingIdPlayers() {
-        game.register(player1);
-        game.register(player4);
-
-        assertThrows(AlreadyExistsException.class, () -> game.register(player6));
-    }
-
-    @Test
     void registerExistingNamePlayers() {
         game.register(player1);
         game.register(player2);
+        game.register(player5);
 
-        assertThrows(AlreadyExistsException.class, () -> game.register(player5));
+        int expected = 2;
+        int actual = game.getRegisterPlayers().size();
+
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -1,25 +1,15 @@
 package ru.netology.domain;
 
 public class Player {
-    private int id;
     private String name;
     private int strength;
 
     public Player() {
     }
 
-    public Player(int id, String name, int strength) {
-        this.id = id;
+    public Player(String name, int strength) {
         this.name = name;
         this.strength = strength;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
