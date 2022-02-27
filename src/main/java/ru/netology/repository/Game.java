@@ -30,8 +30,8 @@ public class Game {
     }
 
     public int round(String playerName1, String playerName2) {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        Player player1 = null;
+        Player player2 = null;
         for (Player player : registerPlayers) {
             if (playerName1.equals(player.getName())) {
                 player1 = player;
@@ -40,7 +40,7 @@ public class Game {
                 player2 = player;
             }
         }
-        if (player1.getName() != null && player2.getName() != null) {
+        if (player1 != null && player2 != null) {
             if (player1.getStrength() > player2.getStrength()) {
                 return 1;
             } else if (player1.getStrength() < player2.getStrength()) {
