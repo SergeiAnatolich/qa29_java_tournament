@@ -3,17 +3,18 @@ package ru.netology.repository;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Player;
 import ru.netology.exception.NotRegisteredException;
+import ru.netology.exception.AlreadyExistsException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
     Game game = new Game();
 
-    private final Player player1 = new Player("Hero", 150);
-    private final Player player2 = new Player("Weak", 1);
-    private final Player player3 = new Player("Strong", 150);
-    private final Player player4 = new Player("Super hero", 300);
-    private final Player player5 = new Player("Hero", 250);
+    private final Player player1 = new Player(13, "Hero", 150);
+    private final Player player2 = new Player(54, "Weak", 1);
+    private final Player player3 = new Player(23, "Strong", 150);
+    private final Player player4 = new Player(4, "Super hero", 300);
+    private final Player player5 = new Player(60, "Hero", 250);
 
     @Test
     void registerOnePlayer() {
@@ -36,16 +37,12 @@ class GameTest {
     void registerExistingNamePlayers() {
         game.register(player1);
         game.register(player2);
-        game.register(player5);
 
-        int expected = 2;
-        int actual = game.getRegisterPlayers().size();
-
-        assertEquals(expected, actual);
+        assertThrows(AlreadyExistsException.class, () -> game.register(player5));
     }
 
     @Test
-    void round1() {
+    void roundPlayerStrengthEqual() {
         game.register(player1);
         game.register(player3);
 
@@ -56,7 +53,7 @@ class GameTest {
     }
 
     @Test
-    void round2() {
+    void roundPlayer1Stronger() {
         game.register(player4);
         game.register(player2);
 
@@ -67,7 +64,7 @@ class GameTest {
     }
 
     @Test
-    void round3() {
+    void roundPlayer2Stronger() {
         game.register(player2);
         game.register(player3);
 
@@ -78,18 +75,7 @@ class GameTest {
     }
 
     @Test
-    void round4() {
-        game.register(player1);
-        game.register(player4);
-
-        int expected = 2;
-        int actual = game.round("Hero", "Super hero");
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void round5() {
+    void roundPlayerNotRegistered() {
         game.register(player5);
         game.register(player2);
 

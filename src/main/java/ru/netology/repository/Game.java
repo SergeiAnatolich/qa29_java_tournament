@@ -1,6 +1,7 @@
 package ru.netology.repository;
 
 import ru.netology.domain.Player;
+import ru.netology.exception.AlreadyExistsException;
 import ru.netology.exception.NotRegisteredException;
 
 import java.util.HashMap;
@@ -10,7 +11,11 @@ public class Game {
     private final HashMap<String, Player> registerPlayers = new HashMap<>();
 
     public void register(Player player) {
-        registerPlayers.put(player.getName(), player);
+        if (registerPlayers.containsKey(player.getName())) {
+            throw new AlreadyExistsException("Player with name " + player.getName() + " already exist");
+        } else {
+            registerPlayers.put(player.getName(), player);
+        }
     }
 
     public HashMap<String, Player> getRegisterPlayers() {
